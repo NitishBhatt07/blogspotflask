@@ -1,4 +1,4 @@
 # blogspotflask
 
-# deployment link
+# Hosted on PythonAnyWhere
 https://nbbhatt007.pythonanywhere.com/
