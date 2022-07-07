@@ -12,9 +12,9 @@ from PIL import Image
 def resizePost(image_name):
     img = Image.open('Blog/static/images/blog/'+image_name)
 
-    if os.path.exists("Blog/static/images/blog/" + img_name):
-        resized = img.resize((380,255))
-        resized.save("Blog/static/images/blog/"+image_name)
+#     if os.path.exists("Blog/static/images/blog/" + img_name):
+    resized = img.resize((380,255))
+    resized.save("Blog/static/images/blog/"+image_name)
 
 
 @app.route('/')
