@@ -22,19 +22,19 @@ def resizeUser(image_name,category):
 
     img = Image.open('Blog/static/images/user/'+image_name)
 
-    if os.path.exists("Blog/static/images/user/" + img_name):
-        resized = img.resize(resize_tuple)
-        if category == 'cover':
-            resized = resized.filter(ImageFilter.BLUR)
-        resized.save("Blog/static/images/user/"+image_name)
+#     if os.path.exists("Blog/static/images/user/" + img_name):
+    resized = img.resize(resize_tuple)
+    if category == 'cover':
+        resized = resized.filter(ImageFilter.BLUR)
+    resized.save("Blog/static/images/user/"+image_name)
 
 
 def resizePost(image_name):
     img = Image.open('Blog/static/images/blog/'+image_name)
 
-    if os.path.exists("Blog/static/images/blog/" + img_name):
-        resized = img.resize((380,255))
-        resized.save("Blog/static/images/blog/"+image_name)
+#     if os.path.exists("Blog/static/images/blog/" + img_name):
+    resized = img.resize((380,255))
+    resized.save("Blog/static/images/blog/"+image_name)
 
 
 
