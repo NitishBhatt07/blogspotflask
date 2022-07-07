@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'flash_messages.html' %}
+
+{{current_user.username}}
+{{current_user.posts.poster_id}}
+
+{{post_to_edit.post_pic}}
+
+{% endblock %}
+

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'flash_messages.html' %}
+
+
+  <!--Main layout-->
+  <main class="my-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5"><strong>Your Search Results</strong></h4>
+
+        <!--  Recent Photo section 4-->
+            <div class="d-flex justify-content-between align-items-center mb-4" style="background-color: #E0E0E0;">
+              <p class="lead fw-normal mb-0" >Total Posts : {{total_posts}}</p>
+              <p class="mb-0">
+                <a class="btn btn-outline-secondary text-muted" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                Show all Posts
+              </a>
+            </div>
+
+        <div class='row card-group'>
+                {% for item in searched_posts %}
+
+                  {% if loop.index <= 6 %}
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                      <a href="{{url_for('post',id=item.id)}}" >
+                          <embed
+                            src="{{ url_for('static', filename='images/blog/'+item.post_pic) }}"
+                            class="card-img-top"
+                            alt="..."
+                          />
+                      </a>
+                      <div class="card-body">
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                        <p class="card-text">
+                            <div class="text-muted fst-italic mb-2">Posted on {{item.posted_on}} </br> by {{item.author}}</div>
+                        </p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="{{url_for('post',id=item.id)}}" class="btn btn-outline-secondary text-muted">View Post</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% else %}
+                  </br>
+                    <div class="col-4 collapse" id="collapseExample">
+                        <div class="card">
+                            <a href="{{url_for('post',id=item.id)}}" >
+                              <embed
+                                src="{{ url_for('static', filename='images/blog/'+item.post_pic) }}"
+                                class="card-img-top"
+                                alt="..."
+                              />
+                            </a>
+                          <div class="card-body">
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                            <p class="card-text">
+                                <div class="text-muted fst-italic mb-2">Posted on {{item.posted_on}} </br> by {{item.author}}</div>
+                            </p>
+                          </div>
+                          <div class="card-footer">
+                            <a href="{{url_for('post',id=item.id)}}" class="btn btn-outline-secondary text-muted">View Post</a>
+                          </div>
+                        </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+
+      </section>
+      <!--Section: Content-->
+
+      <!-- Pagination -->
+      <nav class="my-4" aria-label="...">
+        <ul class="pagination pagination-circle justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+{% endblock %}

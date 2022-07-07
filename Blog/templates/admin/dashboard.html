@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'flash_messages.html' %}
+
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+    </style>
+
+
+  <!--Main layout-->
+  <main class="my-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5"><strong>Admin Panel</strong></h4>
+
+        <!--  Recent Photo section 4-->
+            <div class="d-flex justify-content-between align-items-center mb-4" style="background-color: #E0E0E0;">
+              <p class="lead fw-normal mb-0" >All Users</p>
+              <p class="mb-0">
+                <a class="btn btn-outline-secondary text-muted" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                Show all Users
+              </a>
+            </div>
+
+<!--          All Users...........................................................-->
+          <table class="table align-middle mb-0 bg-white">
+              <thead class="bg-light">
+                <tr>
+                  <th>Id</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Profile</th>
+                  <th>Cover</th>
+                  <th>Registered On</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for user in all_users %}
+
+                {% if loop.index <=6 %}
+                    <tr>
+                      <td>
+                          <p class=" mb-2">{{user.id}}</p>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                              src="{{url_for('static',filename='images/user/'+user.profile_pic)}}"
+                              alt=""
+                              style="width: 45px; height: 45px; margin-left:10px"
+                              class="rounded-circle"
+                              />
+                          <div class="ms-3">
+                            <p class=" mb-2">{{user.username}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <p class=" mb-2">{{user.email}}</p>
+                      </td>
+                      <td>
+                        <img
+                          src="{{url_for('static',filename='images/user/'+user.profile_pic)}}"
+                          alt=""
+                          style="width: 45px; height: 45px"/>
+                      </td>
+                      <td>
+                        <img
+                          src="{{url_for('static',filename='images/user/'+user.cover_pic)}}"
+                          alt=""
+                          style="width: 45px; height: 45px"/>
+                      </td>
+                      <td>
+                          <p class="mb-2">{{user.registered_on}}</p>
+                      </td>
+                      <td>
+                          <a href="{{url_for('editUserAdmin',id=user.id)}}" type="button" class="btn btn-outline-primary">Update</a>
+                      </td>
+                      <td>
+                          <a href="{{url_for('deleteUserAdmin',id=user.id)}}" type="button" class="btn btn-outline-danger">Delete</a>
+                      </td>
+                    </tr>
+                {% else %}
+                    <tr id="collapseExample">
+                      <td>
+                          <p class=" mb-2">{{user.id}}</p>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                              src="{{url_for('static',filename='images/user/'+user.profile_pic)}}"
+                              alt=""
+                              style="width: 45px; height: 45px; margin-left:10px"
+                              class="rounded-circle"
+                              />
+                          <div class="ms-3">
+                            <p class=" mb-2">{{user.username}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                          <p class=" mb-2">{{user.email}}</p>
+                      </td>
+                      <td>
+                        <img
+                          src="{{url_for('static',filename='images/user/'+user.profile_pic)}}"
+                          alt=""
+                          style="width: 45px; height: 45px"/>
+                      </td>
+                      <td>
+                        <img
+                          src="{{url_for('static',filename='images/user/'+user.cover_pic)}}"
+                          alt=""
+                          style="width: 45px; height: 45px"/>
+                      </td>
+                      <td>
+                          <p class="mb-2">{{user.registered_on}}</p>
+                      </td>
+                      <td>
+                          <a href="{{url_for('editUserAdmin',id=user.id)}}" type="button" class="btn btn-outline-primary">Update</a>
+                      </td>
+                      <td>
+                          <a href="{{url_for('deleteUserAdmin',id=user.id)}}" type="button" class="btn btn-outline-danger">Delete</a>
+                      </td>
+                    </tr>
+                {% endif %}
+
+              {% endfor %}
+              </tbody>
+            </table>
+
+          </br></br></br></br>
+
+          <!-- All Posts -->
+           <div class="d-flex justify-content-between align-items-center mb-4" style="background-color: #E0E0E0;">
+              <p class="lead fw-normal mb-0" >All Posts</p>
+              <p class="mb-0">
+                <a class="btn btn-outline-secondary text-muted" data-bs-toggle="collapse" href="#collapseExample1" role="button"
+                   aria-expanded="false" aria-controls="collapseExample1">
+                Show all Posts
+              </a>
+            </div>
+
+          <table class="table align-middle mb-0 bg-white">
+              <thead class="bg-light">
+                <tr>
+                  <th>Id</th>
+                  <th>Author</th>
+                  <th>Title</th>
+                  <th>Cover</th>
+                  <th>Posted On</th>
+                  <th>Poster Id</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for post in all_posts %}
+
+                {% if loop.index <=6 %}
+                    <tr>
+                      <td>
+                         <p class=" mb-2">{{post.id}}</p>
+                      </td>
+                      <td>
+                        <p class="mb-2">{{post.author}}</p>
+                      </td>
+                      <td>
+                          <p class="mb-2">{{post.title}}</p>
+                      </td>
+                      <td>
+                        <img
+                          src="{{url_for('static',filename='images/blog/'+post.post_pic)}}"
+                          alt=""
+                          style="width: 45px; height: 45px"/>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1">{{post.posted_on}}</p>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1">{{post.poster_id}}</p>
+                      </td>
+                      <td>
+                          <a href="{{url_for('editPostAdmin',id=post.id)}}" type="button" class="btn btn-outline-primary">Update</a>
+                      </td>
+                      <td>
+                          <a href="{{url_for('deletePostAdmin',id=post.id)}}" type="button" class="btn btn-outline-danger">Delete</a>
+                      </td>
+                    </tr>
+                {% else %}
+                    <tr id="collapseExample1">
+                      <td>
+                         <p class=" mb-2">{{post.id}}</p>
+                      </td>
+                      <td>
+                        <p class="mb-2">{{post.author}}</p>
+                      </td>
+                      <td>
+                          <p class="mb-2">{{post.title}}</p>
+                      </td>
+                      <td>
+                        <img
+                          src="{{url_for('static',filename='images/blog/'+post.post_pic)}}"
+                          alt=""
+                          style="width: 45px; height: 45px"/>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1">{{post.posted_on}}</p>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1">{{post.poster_id}}</p>
+                      </td>
+                      <td>
+                          <a href="{{url_for('editPostAdmin',id=post.id)}}" type="button" class="btn btn-outline-primary">Update</a>
+                      </td>
+                      <td>
+                          <a href="{{url_for('deletePostAdmin',id=post.id)}}"  type="button" class="btn btn-outline-danger">Delete</a>
+                      </td>
+                    </tr>
+                {% endif %}
+              {% endfor %}
+              </tbody>
+            </table>
+
+
+      </section>
+      <!--Section: Content-->
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+{% endblock %}

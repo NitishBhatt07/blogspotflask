@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'flash_messages.html' %}
+
+<div class="container">
+
+<!--<section class="h-100 gradient-custom-2" >-->
+  <div class="container py-5 h-100" >
+    <div class="row d-flex justify-content-left align-items-center h-100" >
+      <center>
+      <div class="col col-lg-9 col-xl-7" style="width: 1100px;">
+        <div class="card" style="background-color: #F5F5F5" >
+
+          {% if current_user.cover_pic != 'empty' %}
+            <div class="rounded-top text-white d-flex flex-row"
+               style="height:200px; background-image: url({{url_for('static',filename='images/user/'+current_user.cover_pic)}})">
+          {% else %}
+            <div class="rounded-top text-white d-flex flex-row"
+               style="height:200px; background-image: url({{url_for('static',filename='images/user/default_cover_pic.png')}})">
+          {% endif %}
+
+          <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+            {% if current_user.profile_pic != 'empty' %}
+              <img src="{{url_for('static',filename='images/user/'+current_user.profile_pic)}}"
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; height: 150px; z-index: 1"/>
+            {% else %}
+              <img src="{{url_for('static',filename='images/user/default_profile_pic.png')}}"
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; height: 150px; z-index: 1"/>
+            {% endif%}
+            <a href="{{url_for('edit_user',id=current_user.id)}}" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+              style="z-index: 1;">
+              Edit profile
+            </a>
+            </div>
+
+            <div class="ms-3" style="margin-top: 130px;">
+              <h5>{{current_user.username}}</h5>
+              <p>{{current_user.email}}</p>
+              </div>
+          </div>
+
+          <div class="p-4 text-black" style="background-color: #E0E0E0;"> <!--#f8f9fa-->
+            <div class="d-flex justify-content-end text-center py-1" style="background-color: #E0E0E0;">
+
+              <div class=" p-2 border border-secondary">
+                <p class=" text-muted mb-1 h6">Posts ({{total_posts}})</p>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div >
+                <a href="{{url_for('add_post')}}" class="btn btn-outline-secondary">Add Post</a>
+              </div>
+              &nbsp;&nbsp;
+              <div>
+                <a href="{{url_for('logout')}}" class="btn btn-outline-secondary">Logout</a>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="card-body p-4 text-black" style="background-color: #f5f5f5;">
+
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1" style="background-color: #E0E0E0;" >About</p>
+              <div class="p-4" style="background-color: #E0E0E0;">
+                <p class="font-italic mb-1" >{{current_user.bio}}</p>
+              </div>
+            </div>
+
+            <!--  Recent Photo section 4-->
+            <div class="d-flex justify-content-between align-items-center mb-4" style="background-color: #E0E0E0;">
+              <p class="lead fw-normal mb-0" >Recent Posts</p>
+              <p class="mb-0">
+                <a class="text-muted" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                   aria-expanded="false" aria-controls="collapseExample">
+                Show all Posts
+              </a>
+            </div>
+
+
+            <!--  shiowing first 4-->
+              <div class='row card-group'>
+                {% for item in user_posts %}
+
+                  {% if loop.index <= 6 %}
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                      <a href="{{url_for('post',id=item.id)}}" >
+                        {% if item.post_pic != 'empty' %}
+                          <embed
+                            src="{{ url_for('static', filename='images/blog/'+item.post_pic) }}"
+                            class="card-img-top"
+                            alt="..."
+                          />
+                        {% else %}
+                          <embed
+                            src="{{url_for('static',filename='images/blog/default_post_pic.png')}}"
+                            class="card-img-top"
+                            alt="..."
+                          />
+                        {% endif %}
+                      </a>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                        <p class="card-text">
+                            <div class="text-muted fst-italic mb-2">Posted on {{item.posted_on}} </br> by {{item.author}}</div>
+                        </p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="{{url_for('post',id=item.id)}}" class="btn btn-outline-secondary ">View Post</a>
+                        <a href="{{url_for('edit_post',id=item.id)}}" class="btn btn-outline-primary ">Edit Post</a>
+                        <a href="{{url_for('delete_post',id=item.id)}}" class="btn btn-outline-danger ">Delete Post</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% else %}
+                  </br>
+                    <div class="col-4 collapse" id="collapseExample">
+                        <div class="card">
+                            <a href="{{url_for('post',id=item.id)}}" >
+                              {% if item.post_pic != 'empty' %}
+                                <embed
+                                  src="{{ url_for('static', filename='images/blog/'+item.post_pic) }}"
+                                  class="card-img-top"
+                                  alt="..."
+                                />
+                              {% else %}
+                                <embed
+                                  src="{{url_for('static',filename='images/blog/default_post_pic.png')}}"
+                                  class="card-img-top"
+                                  alt="..."
+                                />
+                              {% endif %}
+                            </a>
+                          <div class="card-body">
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                            <p class="card-text">
+                                <div class="text-muted fst-italic mb-2">Posted on {{item.posted_on}} </br> by {{item.author}}</div>
+                            </p>
+                          </div>
+                          <div class="card-footer">
+                            <a href="{{url_for('post',id=item.id)}}" class="btn btn-outline-secondary ">View Post</a>
+                            <a href="{{url_for('edit_post',id=item.id)}}" class="btn btn-outline-primary ">Edit Post</a>
+                            <a href="{{url_for('delete_post',id=item.id)}}" class="btn btn-outline-danger ">Delete Post</a>
+                          </div>
+                        </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+
+          </div>
+        </div>
+      </div>
+      </div>
+        </center>
+    </div>
+  </div>
+<!--</section>-->
+  </div>
+
+
+{% endblock %}
