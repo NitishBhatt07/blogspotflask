@@ -25,11 +25,11 @@ def resize(image_name,category):
 
     img = Image.open('Blog/static/images/user/'+image_name)
 
-    if os.path.exists("Blog/static/images/user/" + img_name):
-        resized = img.resize(resize_tuple)
-        if category == 'cover':
-            resized = resized.filter(ImageFilter.BLUR)
-        resized.save("Blog/static/images/user/"+image_name)
+#     if os.path.exists("Blog/static/images/user/" + img_name):
+    resized = img.resize(resize_tuple)
+    if category == 'cover':
+        resized = resized.filter(ImageFilter.BLUR)
+    resized.save("Blog/static/images/user/"+image_name)
 
 
 @login_manager.user_loader
